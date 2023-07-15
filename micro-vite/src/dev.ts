@@ -5,6 +5,7 @@ import { transformMiddleware } from "./transformMiddleware";
 import { getPlugins } from "./plugins";
 import { createPluginContainer } from "./pluginContainer";
 import { setupReloadServer } from "./reloadPlugin";
+import { createFileWatcher } from "./fileWatcher";
 
 export const startDev = () => {
   const server = connect();
@@ -30,8 +31,8 @@ export const startDev = () => {
 
   console.log("dev server running at http://localhost:3000");
 
-  setTimeout(() => {
-    console.log("reload!")
+  createFileWatcher((eventName, path) => {
+    console.log(`Detected file change (${eventName}) reloading!: ${path}`);
     ws.send({ type: "reload" });
-  }, 1000 * 5);
+  });
 };
