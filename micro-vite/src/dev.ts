@@ -10,6 +10,11 @@ export const startDev = () => {
     sirv(undefined, {
       dev: true,
       etag: true,
+      setHeaders: (res, pathname) => {
+        if (/\.[tj]s$/.test(pathname)) {
+          res.setHeader("Content-Type", "application/javascript");
+        }
+      },
     })
   );
   server.use(historyApiFallback() as any); // ファイルが存在しなかったときにindex.htmlを返すようにするミドルウェア
