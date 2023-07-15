@@ -7,6 +7,9 @@
     "build": "tsup src/index.ts",
     "watch": "tsup src/index.ts --watch"
   },
+  "bin": {
+    "micro-vite": "cli.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
