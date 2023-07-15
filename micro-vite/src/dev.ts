@@ -12,7 +12,7 @@ export const startDev = () => {
   server.listen(3000, "localhost");
   const ws = setupReloadServer();
 
-  const plugins = getPlugins();
+  const plugins = getPlugins(true);
   const pluginContainer = createPluginContainer(plugins);
 
   server.use(transformMiddleware(pluginContainer));
