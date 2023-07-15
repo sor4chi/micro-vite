@@ -3,3 +3,8 @@ lockfileVersion: '6.0'
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
+
+devDependencies:
+  micro-vite:
+    specifier: ^1.0.0
+    version: link:../micro-vite
