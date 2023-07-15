@@ -16,8 +16,10 @@
   "devDependencies": {
     "@types/connect": "^3.4.35",
     "@types/connect-history-api-fallback": "^1.5.0",
+    "@types/ws": "^8.5.5",
     "rollup": "^3.26.2",
-    "tsup": "^7.1.0"
+    "tsup": "^7.1.0",
+    "ws": "^8.13.0"
   },
   "dependencies": {
     "cac": "^6.7.14",
