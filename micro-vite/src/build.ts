@@ -1,11 +1,15 @@
 import * as path from "node:path";
 import * as fs from "node:fs/promises";
 import parse from "node-html-parser";
+import { rollup } from "rollup";
+import { getPlugins } from "./plugins";
 
 const root = process.cwd();
 const dist = path.resolve(root, "./dist");
 
 export const startBuild = async () => {
+  const plugins = getPlugins(false);
+
   await fs.rm(dist, { recursive: true, force: true }).catch(() => {});
   await fs.mkdir(dist);
 
@@ -13,7 +17,18 @@ export const startBuild = async () => {
   const distIndexHtmlPath = path.resolve(dist, "./index.html");
 
   await processHtml(indexHtmlPath, distIndexHtmlPath, async (src) => {
-    return src + "?processed";
+    const bundle = await rollup({
+      input: path.resolve(root, `.${src}`),
+      plugins,
+    });
+    const { output } = await bundle.write({
+      dir: dist,
+      format: "es",
+      entryFileNames: "assets/[name]-[hash].js",
+      chunkFileNames: "assets/[name]-[hash].js",
+    });
+    await bundle.close();
+    return `/${output[0].fileName}`;
   });
 };
 
