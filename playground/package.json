@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "micro-vite dev",
-    "build": "micro-vite build"
+    "build": "micro-vite build",
+    "preview": "sirv dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "micro-vite": "^1.0.0"
+    "micro-vite": "^1.0.0",
+    "sirv-cli": "^2.0.2"
   }
 }
